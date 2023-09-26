@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Name=MhlFileVerify
+GenericName=MHL Verify
+Comment=GUI Wrapper for verify data
+Icon=app_logo
+Exec=MhlFileVerify
+Terminal=true
+Categories=Utility
+X-AppImage-Version=1bcdf10
+#StartupWMClass=<wmclass>
+StartupWMClass=<string>

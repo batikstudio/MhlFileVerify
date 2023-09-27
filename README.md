@@ -1,4 +1,4 @@
-# MhlToolVerify
+# MhlFileVerify
 
 Mhl File Verify for Linux is a tool written in Python and Qt to verify and seal data according to the implementation of the MHL standard.
 
@@ -36,4 +36,6 @@ Data Management can be a task which requires an high level of safety. By this re
 
 This app is distributed as Appimage format. It has been tested on Ubuntu 22.04, Linux Mint and MxLinux. Other systems like like Rocky Linux 8 / Red Hat are not supponted currently due to the old GLIB version. However, you could make it work from source code if you install Pyside6.
 
+## Known Issues
 
+- From ISO / UDF volumes, the seal process is incorrect.

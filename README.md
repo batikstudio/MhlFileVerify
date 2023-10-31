@@ -6,7 +6,7 @@ This tool is useful to verify backups created from other tools such as Davinci R
 
 Data Wranglers and DIT's can verify video data in Linux Systems.
 
-This software is based on and includes the original [mhl-tool]([GitHub - pomfort/mhl-tool: A reference implementation for creating and verifying MHL files](https://github.com/pomfort/mhl-tool)) by Pomfort.
+This software is based on and includes the original [mhl-tool](https://github.com/pomfort/mhl-tool) by Pomfort.
 
 <img src="https://batikstudio.com/mhlfileverify/screenshot.png" title="" alt="" data-align="center">
 
@@ -38,7 +38,7 @@ This app is distributed as Appimage format. It has been tested on Ubuntu 22.04, 
 
 ## OSX
 
-MhlFileVerify app works in OSX too. You just need replace [mhl-tool binary]([Downloads - Pomfort](https://pomfort.com/downloads/)) for mac.
+MhlFileVerify app works in OSX too. You just need replace [mhl-tool binary](https://pomfort.com/downloads/) for mac.
 
 From terminal:
 

@@ -45,8 +45,10 @@ From terminal:
 - Install python3
 
 - Install pySide6
-  `python3 -m pip install --upgrade pip --user`
-  `python3 -m pip install pyside6`
+  ```
+  python3 -m pip install --upgrade pip --user
+  python3 -m pip install pyside6
+  ```
 
 - Run main script from /src
   

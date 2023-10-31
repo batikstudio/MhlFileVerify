@@ -2,11 +2,11 @@
 
 Mhl File Verify for Linux is a tool written in Python and Qt to verify and seal data according to the implementation of the MHL standard.
 
-This tool is useful to verify backups created from other tools such as Davinci Resolve Clone tool, which generates a mhl file during the copy with file hashes (md5).
+This tool is useful to verify backups created from other tools such as Davinci Resolve Clone tool, which generates a mhl file during the copy process with file hashes (md5).
 
-Data Wranglers (DIT's) can verify video data in Linux Systems.
+Data Wranglers and DIT's can verify video data in Linux Systems.
 
-This software is based on and includes the original mhl-tool by Pomfort.
+This software is based on and includes the original [mhl-tool]([GitHub - pomfort/mhl-tool: A reference implementation for creating and verifying MHL files](https://github.com/pomfort/mhl-tool)) by Pomfort.
 
 <img src="https://batikstudio.com/mhlfileverify/screenshot.png" title="" alt="" data-align="center">
 
@@ -20,7 +20,7 @@ This software is based on and includes the original mhl-tool by Pomfort.
 
 - Choose the checksum type (MD5 and SHA1)
 
-- Built in mhl-tool
+- Built in Linux / OSX mhl-tool binaries
 
 ## System requeriments
 
@@ -28,7 +28,7 @@ This software is based on and includes the original mhl-tool by Pomfort.
 
 - Pyside6
 
-- Libcrypto3 to run mhl-tool
+- Libcrypto3 to run mhl-tool in Linux
 
 ## Appimage version
 
@@ -36,6 +36,61 @@ Data Management can be a task which requires an high level of safety. By this re
 
 This app is distributed as Appimage format. It has been tested on Ubuntu 22.04, Linux Mint and MxLinux. Other systems like like Rocky Linux 8 / Red Hat are not supponted currently due to the old GLIB version. However, you could make it work from source code if you install Pyside6.
 
+## OSX
+
+MhlFileVerify app works in OSX too. You just need replace [mhl-tool binary]([Downloads - Pomfort](https://pomfort.com/downloads/)) for mac.
+
+From terminal:
+
+- Install python3
+
+- Install pySide6
+  `python3 -m pip install --upgrade pip --user`
+  `python3 -m pip install pyside6`
+
+- Run main script from /src
+  
+  `python3 main.py`
+
 ## Known Issues
 
 - From ISO / UDF volumes, the seal process is incorrect.
+- Fonts don't load in OSX
+
+## Changelog
+
+#### v0.3
+
+- Added initial suppor for OSX intel based
+
+- Added OS detection
+
+- Added OSX mhl-tool binary
+
+- Added status messages while the data is verified
+
+#### v0.2
+
+- Changed the GUI to QT/Pyside
+
+- Added support Drag and Drop files and folders
+
+- Added status bar messages
+
+- Added error dialogs
+
+- First version in Appimage
+
+#### v0.1
+
+- Initial GUI design in Tkinter
+
+- Added new compilated binary of mhl-tool to current Linux distros which use libcrypto3
+
+- Basic features to verify mhl files only
+
+
+
+
+
+[BatikStudio](https://batikstudio.com) Home Page

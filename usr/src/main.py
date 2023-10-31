@@ -6,8 +6,8 @@ from components.verify_tab import verify_tab_class
 from components.seal_tab import seal_tab_class
 from components.dialogs import dialogs
 from components.SharedClasses import ConfigFile
-
 from components.verifications import initialVerifications
+
 from PySide6.QtUiTools import QUiLoader
 from PySide6.QtWidgets import (QApplication, QFrame, QGridLayout, QHBoxLayout,
     QLabel, QLayout, QLineEdit, QListView, QComboBox, QWidget,
@@ -20,7 +20,7 @@ from PySide6.QtGui import (QAction, QBrush, QColor, QConicalGradient,
     QCursor, QFont, QFontDatabase, QGradient,
     QIcon, QImage, QKeySequence, QLinearGradient,
     QPainter, QPalette, QPixmap, QRadialGradient,
-    QTransform, QDragEnterEvent, QDropEvent, QFontDatabase)
+    QTransform, QDragEnterEvent, QDropEvent)
 
 
 class Mainwindow(QMainWindow):
@@ -121,10 +121,13 @@ class Mainwindow(QMainWindow):
 
     def load_fonts(self):
         # To find real name of a font "fc-scan OpenSans-SemiBold.ttf"
-        print("Fonts Loaded")
-        QFontDatabase.addApplicationFont('../share/fonts/OpenSans-Regular.ttf')
-        QFontDatabase.addApplicationFont('../share/fonts/OpenSans-Light.ttf')
-        QFontDatabase.addApplicationFont('../share/fonts/OpenSans-SemiBold.ttf')
+        try:
+            QFontDatabase.addApplicationFont('../share/fonts/OpenSans-Regular.ttf')
+            QFontDatabase.addApplicationFont('../share/fonts/OpenSans-Light.ttf')
+            QFontDatabase.addApplicationFont('../share/fonts/OpenSans-SemiBold.ttf')
+            print("- Fonts Loaded")
+        except:
+            print("- Error loading custom fonts")
 
 if __name__ == "__main__":
     app = QApplication([])
@@ -132,11 +135,13 @@ if __name__ == "__main__":
     application.load_fonts()
     ConfigFile.verify_config_file()
     appInitialVerifications = initialVerifications(application)
-    appInitialVerifications.verify_mhltool_installed(appInitialVerifications.mhltool_bin)
+    appInitialVerifications.platform_detection()
+    appInitialVerifications.verify_mhltool_installed()
     appInitialVerifications.verify_libs(appInitialVerifications.libcrypto_lib)
     appVerifyMhl = verify_tab_class(application) # To MainWindow instance
     appSeal = seal_tab_class(application)
     dialogsInstance = dialogs(application)
     application.menu_actions()
     application.buttons_verify_tab()
+
     app.exec()

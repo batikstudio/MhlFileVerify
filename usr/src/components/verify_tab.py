@@ -4,10 +4,11 @@
 
 import os
 import subprocess
-from PySide6.QtWidgets import (QFileDialog, QLineEdit, QMessageBox, QStatusBar)
+from PySide6.QtWidgets import (QFileDialog, QLineEdit, QMessageBox, QStatusBar, QApplication)
 from PySide6.QtGui import QIcon, QPixmap
 from components.dialogs import dialogs
 from components.SharedClasses import errors
+import components.verifications
 
 class verify_tab_class:
 
@@ -24,6 +25,9 @@ class verify_tab_class:
 
     def verify_mhl_file(self):
         file_to_verify = self.parent.window.line_edit_file.text()
+        self.parent.set_status_message("Analyzing files... Please, wait")
+        binary = components.verifications.mhltool_bin
+        QApplication.processEvents()
         
         if file_to_verify == "":
             QMessageBox.information(self.parent.window,"File not selected", "Please, select a file.")
@@ -33,12 +37,13 @@ class verify_tab_class:
             QMessageBox.information(self.parent.window,"File not found", "Missing file. Please, select a file.")
         else:
             try:
-                command_verify = f"./../bin/mhl verify -v -f \'{file_to_verify}\'"
+                command_verify = f"./{binary} verify -v -f \'{file_to_verify}\'"
                 exec_command_verify = subprocess.run(command_verify, shell=True, text=True, stderr=subprocess.PIPE, stdout=subprocess.PIPE)
                 verify_returncode = exec_command_verify.returncode
                 title_error = f"Error: {verify_returncode}"
                 print("Selected file", file_to_verify)
-                # print(command_verify)
+                print(command_verify)
+                self.parent.set_status_message("Analyzing files...")
             except UnicodeDecodeError:
                 QMessageBox.critical(self.parent.window,"Incorrect file", "Please, select a correct UTF-8 mhl file.")
 
@@ -48,9 +53,10 @@ class verify_tab_class:
                 standard_out = exec_command_verify.stdout
                 title = "Successful"
                 description = f"Verification Completed. The file {file_to_verify} is correct."
+                self.parent.set_status_message("Verification successful")
                 dialogs.SuccessDialog(self, title, description, standard_out)
                 print("------------------\nThe verify was correct!")
-                self.parent.set_status_message("Verification successful")
+
 
                 ####       ERRORS       ####
 

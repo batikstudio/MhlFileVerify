@@ -36,15 +36,16 @@ Data Management can be a task which requires an high level of safety. By this re
 
 This app is distributed as Appimage format. It has been tested on Ubuntu 22.04, Linux Mint and MxLinux. Other systems like like Rocky Linux 8 / Red Hat are not supponted currently due to the old GLIB version. However, you could make it work from source code if you install Pyside6.
 
-## OSX
+## macOS
 
-MhlFileVerify app works in OSX too. You just need replace [mhl-tool binary](https://pomfort.com/downloads/) for mac.
+MhlFileVerify app works on OSX as well, however, currently only from source. Platform is autodetected on boot and the correct mhltool binary will be selected. If you prefer use command line tool from pomfort, you can download from their [website](https://pomfort.com/downloads/).
 
 From terminal:
 
 - Install python3
 
 - Install pySide6
+  
   ```
   python3 -m pip install --upgrade pip --user
   python3 -m pip install pyside6
@@ -57,7 +58,7 @@ From terminal:
 ## Known Issues
 
 - From ISO / UDF volumes, the seal process is incorrect.
-- Fonts don't load in OSX
+- Fonts don't load correctly on OSX
 
 ## Changelog
 
@@ -69,11 +70,13 @@ From terminal:
 
 - Added OSX mhl-tool binary
 
-- Added status messages while the data is verified
+- Added status messages while the data is being verified
 
 #### v0.2
 
 - Changed the GUI to QT/Pyside
+
+- Added new seal tab to create mhl files
 
 - Added support Drag and Drop files and folders
 
@@ -90,9 +93,5 @@ From terminal:
 - Added new compilated binary of mhl-tool to current Linux distros which use libcrypto3
 
 - Basic features to verify mhl files only
-
-
-
-
 
 [BatikStudio](https://batikstudio.com) Home Page

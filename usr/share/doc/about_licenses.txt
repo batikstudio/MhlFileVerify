@@ -1,5 +1,4 @@
 MHL File Verify
-Version: 0.2
 License: GPL
 Author: Victor Zamora - Batik Studio
 

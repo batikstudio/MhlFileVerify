@@ -1,6 +1,8 @@
 from PySide6.QtWidgets import QMessageBox
 from PySide6.QtGui import QPixmap, QIcon
 
+version_MhlFileVerify = "0.3"
+
 class dialogs:
 
     def __init__(self, parent):
@@ -39,7 +41,7 @@ class dialogs:
         # about_window.setStyleSheet("QLabel{font-style: Open Sans Light; font-size: 20px;}")
         logo_batik = QPixmap("../share/icons/app_logo_128x128.png")
         about_window.setWindowTitle("About MHL File Verify")
-        about_window.setText("""Version: 0.2\n
+        about_window.setText(f"""Version: {version_MhlFileVerify}\n
 Simple tool to verify mhl hash files\n
 This software is licensed under the GNU General Public License v3.0 (GPLv3).\n
 This software includes a binary from third-party mhltool by Pomfort licensed under the MIT License.\n

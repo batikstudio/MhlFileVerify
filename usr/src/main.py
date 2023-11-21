@@ -4,7 +4,7 @@ import os
 import sys
 from components.verify_tab import verify_tab_class
 from components.seal_tab import seal_tab_class
-from components.dialogs import dialogs
+from components.dialogs import dialogs, CustomDialogs
 from components.SharedClasses import ConfigFile
 from components.verifications import initialVerifications
 
@@ -15,7 +15,7 @@ from PySide6.QtWidgets import (QApplication, QFrame, QGridLayout, QHBoxLayout,
     QSizePolicy, QStatusBar, QVBoxLayout, QWidget, QFileDialog, QMessageBox)
 from PySide6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
     QMetaObject, QObject, QPoint, QRect,
-    QSize, QTime, QUrl, Qt, QFile, QResource, QEvent)
+    QSize, QTime, QUrl, Qt, QFile, QResource, QEvent, QTimer)
 from PySide6.QtGui import (QAction, QBrush, QColor, QConicalGradient,
     QCursor, QFont, QFontDatabase, QGradient,
     QIcon, QImage, QKeySequence, QLinearGradient,
@@ -34,6 +34,7 @@ class Mainwindow(QMainWindow):
         self.verifyTab = verify_tab_class(self) # Pass the main window as a parent
         self.sealTab = seal_tab_class(self) # Pass the main window as a parent
         self.dialogsClass = dialogs(self) # Pass the main window as a parent
+        self.CustomDialogsdialogsClass = CustomDialogs(self) # Pass the main window as a parent
         
         icon_mhl_file_label = self.window.icon_mhl_file_label
         icon_mhl_file_label.installEventFilter(self)
@@ -42,7 +43,7 @@ class Mainwindow(QMainWindow):
 
 
     def menu_actions(self):
-        print("Actions loaded")
+        print("- Actions loaded")
         action_Quit = self.window.actionQuit
         action_Quit.triggered.connect(QCoreApplication.quit)
         action_Open_file_mhl = self.window.actionOpen_mhl_file
@@ -52,13 +53,13 @@ class Mainwindow(QMainWindow):
         action_create_mhl_file = self.window.actionCreate_mhl_file
         action_create_mhl_file.triggered.connect(appSeal.launch_seal)
         action_about = self.window.actionAbout
-        action_about.triggered.connect(dialogsInstance.AboutDialog)
+        action_about.triggered.connect(self.show_about_dialog)
         action_shortcuts = self.window.actionShortcuts
         action_shortcuts.triggered.connect(dialogsInstance.ShortcutsDialog)
 
 
     def buttons_verify_tab(self):
-        print("Buttons loaded")
+        print("- Buttons loaded")
         select_open_mhlFile_button = self.window.button_open_file
         select_open_mhlFile_button.clicked.connect(appVerifyMhl.select_mhl_file)
         verify_button = self.window.button_verify
@@ -70,6 +71,14 @@ class Mainwindow(QMainWindow):
 
     def set_status_message(self, message):
         self.window.statusBar().showMessage(message)
+        
+    def reset_status_message(self):
+        timer = QTimer(self.window)
+        #timer.timeout.connect(self.erase_status_message)
+        timer.singleShot(6000, self.erase_status_message)
+        
+    def erase_status_message(self):
+        self.window.statusBar().showMessage("")
 
     def eventFilter(self, obj, event):
         if event.type() == QEvent.DragEnter:
@@ -128,6 +137,11 @@ class Mainwindow(QMainWindow):
             print("- Fonts Loaded")
         except:
             print("- Error loading custom fonts")
+
+    def show_about_dialog(self):
+        custom_dialogs = CustomDialogs(self)
+        about_dialog = custom_dialogs.AboutDialog()
+        about_dialog.exec()
 
 if __name__ == "__main__":
     app = QApplication([])

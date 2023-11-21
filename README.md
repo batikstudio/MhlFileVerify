@@ -36,9 +36,9 @@ Data Management can be a task which requires an high level of safety. By this re
 
 This app is distributed as Appimage format. It has been tested on Ubuntu 22.04, Linux Mint and MxLinux. Other systems like like Rocky Linux 8 / Red Hat are not supponted currently due to the old GLIB version. However, you could make it work from source code if you install Pyside6.
 
-## macOS
+## MacOS
 
-MhlFileVerify app works on OSX as well, however, currently only from source. Platform is autodetected on boot and the correct mhltool binary will be selected. If you prefer use command line tool from pomfort, you can download from their [website](https://pomfort.com/downloads/).
+MhlFileVerify app works on OSX as well. You can download app DMGs or run from source. If you run it from source, the platform is autodetected on boot and the correct mhltool binary will be selected. If you prefer use command line tool from pomfort, you can download from their [website](https://pomfort.com/downloads/).
 
 From terminal:
 
@@ -58,9 +58,20 @@ From terminal:
 ## Known Issues
 
 - From ISO / UDF volumes, the seal process is incorrect.
-- Fonts don't load correctly on OSX
+  
+  
 
 ## Changelog
+
+#### v.04
+
+- Fixes for MacOS support
+
+- Added new compiled binary mhl-tool ARM for Apple Sillicon
+
+- New custom dialogs to manage errors and information
+
+- First DMG app MacOS version
 
 #### v0.3
 

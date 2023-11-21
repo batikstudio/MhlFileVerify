@@ -7,6 +7,7 @@ from PySide6.QtWidgets import QMainWindow, QApplication, QMessageBox, QStatusBar
 
 mhltool_bin = ""
 os_name = platform.system()
+arch_name = platform.processor()
 
 
 class initialVerifications:
@@ -24,7 +25,12 @@ class initialVerifications:
             print("- Selected bin ", mhltool_bin)
         elif os_name == "Darwin":
             print("- OSX Detected")
-            mhltool_bin = "../bin/mhl_osx_x64"
+            if arch_name == "i386":
+                print("- x86_64 Detected")
+                mhltool_bin = "../bin/mhl_osx_x64"
+            elif arch_name == "arm":
+                print("- ARM Detected")
+                mhltool_bin = "../bin/mhl_osx_arm"
 
         
     def verify_libs(self, library_name):

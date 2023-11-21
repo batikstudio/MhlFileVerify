@@ -3,10 +3,10 @@ License: GPL
 Author: Victor Zamora - Batik Studio
 
 Description: Mhl File Verify for Linux is a tool written in Python and Qt to verify and seal data according to the implementation of the MHL standard.
-You can choose a mhl standard file created from Clone Tool of Davinci Resolve and verify if the copy was correct.
-Also you can generate a new mhl file just like Clone Tool does.
+You can choose a standard mhl file created from Clone Tool of Davinci Resolve and other tools to check if the copy was correct.
+Also you can generate a new mhl file from a data folder just like Clone Tool does.
 
-This software is based on and includes the original mhl-tool by Pomfort (see terms of license bellow).
+This software is based on and includes the original mhl-tool by Pomfort (see terms of license bellow) compiled by us to different plattforms.
 
 This program is licensed under the GNU General Public License (GPL). You can find the full GPL text at https://www.gnu.org/licenses/gpl-3.0.html. 
 

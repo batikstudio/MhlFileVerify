@@ -1,11 +1,14 @@
-# -----------------------------------
-#             Seal Tab
-#------------------------------------
+# ----------------------------------#
+#             Seal Tab              #
+#-----------------------------------#
 
 import os
 import subprocess
+import time
 from PySide6.QtWidgets import (QFileDialog, QLineEdit, QMessageBox, QStatusBar, QComboBox, QApplication)
-from components.dialogs import dialogs
+from PySide6.QtGui import QIcon, QPixmap
+from PySide6.QtCore import QCoreApplication, Qt
+from components.dialogs import dialogs, CustomDialogs
 from components.SharedClasses import errors
 import components.verifications
 
@@ -23,15 +26,11 @@ class seal_tab_class:
         self.dir_to_seal.setText(selected_dir)
         print("- Selected dir", selected_dir)
 
-    def show_message(self):
-        self.parent.set_status_message("Analyzing files... Please, wait")
-
     def launch_seal(self):
         dir_to_seal = self.parent.window.line_edit_directory.text()
         hash_type = self.hash_type.currentText()
         binary = components.verifications.mhltool_bin
-        self.parent.set_status_message("Analyzing folder... Please, wait")
-        QApplication.processEvents() # Update UI
+
 
         if dir_to_seal == "":
             QMessageBox.information(self.parent.window,"Directory not selected", "Please, select a directory.")
@@ -40,26 +39,48 @@ class seal_tab_class:
         elif os.path.isfile(dir_to_seal):
             QMessageBox.critical(self.parent.window,"Wrong selection", "Files are not allowed. Please, select a valid directory.")
         else:
+            self.parent.set_status_message("Analyzing folder...")
+            QApplication.processEvents() # Update UI
             command_seal = f"./{binary} seal -v -t \'{hash_type}\' -o \'{dir_to_seal}\' \'{dir_to_seal}\'"
             print(command_seal)
-            exec_command_seal = subprocess.run(command_seal, shell=True, text=True, stderr=subprocess.PIPE, stdout=subprocess.PIPE)
-            seal_returncode = exec_command_seal.returncode
+            exec_command_seal = subprocess.Popen(command_seal, shell=True, text=True, stderr=subprocess.PIPE, stdout=subprocess.PIPE)
             
+            while exec_command_seal.poll() is None:
+                QApplication.processEvents()
+                time.sleep(0.5)
+                self.parent.set_status_message("Analyzing files")
+                QApplication.processEvents()
+                time.sleep(0.5)
+                self.parent.set_status_message("Analyzing files.")
+                QApplication.processEvents()
+                time.sleep(0.5)
+                self.parent.set_status_message("Analyzing files..")
+                QApplication.processEvents()
+                time.sleep(0.5)
+                self.parent.set_status_message("Analyzing files...")
+            
+            standard_out, standard_error = exec_command_seal.communicate()
+            seal_returncode = exec_command_seal.returncode
+
+                            
             if seal_returncode == 0:
-                standard_out = exec_command_seal.stdout
                 title = "Successful"
-                description = f"The seal process was successful. Mhl file created in {dir_to_seal}"
+                description = f"The seal process was successful.\nMhl file created in:\n{dir_to_seal}"
+                CustomDialogs.CustomSuccessDialog(self, title, description, standard_out)
                 self.parent.set_status_message("Seal successful")
-                dialogs.SuccessDialog(self, title, description, standard_out)
+                QApplication.processEvents()
+                self.parent.reset_status_message()
+                QApplication.processEvents()
                 print("------------------\nThe seal was correct!")
 
             elif seal_returncode != 0:
-                standard_error = exec_command_seal.stderr
                 title_error = f"Error: {seal_returncode}"
                 description_error = errors.get_error_description(seal_returncode)
-                InformativeText = ""
-                self.parent.set_status_message(f"Failed verification - {title_error}")
-                dialogs.ErrorDialog(self, title_error, description_error, standard_error, None)
+                CustomDialogs.CustomErrorDialog(self, title_error, description_error, standard_error)
+                self.parent.set_status_message(f"Failed sealing process - {title_error}")
+                QApplication.processEvents()
+                self.parent.reset_status_message()
+                QApplication.processEvents()
                 print(title_error)
             else:
                 QMessageBox.information(self.parent.window,"Unknown Error", "Unknown Error")

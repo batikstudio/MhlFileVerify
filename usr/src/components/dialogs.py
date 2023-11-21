@@ -58,6 +58,11 @@ class CustomDialogs:
                 color: rgb(200,200,200);
                 selection-background-color: rgb(20,20,20);
                 }
+                
+            QLabel {
+                color: rgb(180,180,180);
+                }
+                
             QTextBrowser {
                   background-color: rgb(30,30,40);
                   selection-color: rgb(246, 97, 81);

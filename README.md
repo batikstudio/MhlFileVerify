@@ -1,10 +1,10 @@
 # MhlFileVerify
 
-Mhl File Verify for Linux is a tool written in Python and Qt to verify and seal data according to the implementation of the MHL standard.
+Mhl File Verify for Linux / MacOS is a tool written in Python and Qt to verify and seal data according to the implementation of the MHL standard.
 
-This tool is useful to verify backups created from other tools such as Davinci Resolve Clone tool, which generates a mhl file during the copy process with file hashes (md5).
+This tool is useful to verify backups created from other tools such as Davinci Resolve Clone tool, which generates a mhl file during the copy process with file hashes (md5, sha).
 
-Data Wranglers and DIT's can verify video data in Linux Systems.
+Data Wranglers and DIT's can verify video data in Linux and MacOS Systems.
 
 This software is based on and includes the original [mhl-tool](https://github.com/pomfort/mhl-tool) by Pomfort.
 
@@ -58,8 +58,6 @@ From terminal:
 ## Known Issues
 
 - From ISO / UDF volumes, the seal process is incorrect.
-  
-  
 
 ## Changelog
 

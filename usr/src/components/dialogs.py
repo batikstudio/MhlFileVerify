@@ -2,7 +2,7 @@ from PySide6.QtWidgets import QMessageBox, QDialog, QVBoxLayout, QHBoxLayout, QL
 from PySide6.QtGui import QPixmap, QIcon
 from PySide6.QtCore import Qt
 
-version_MhlFileVerify = "0.4"
+version_MhlFileVerify = "0.5"
 
 class dialogs:
 
@@ -43,7 +43,12 @@ Ctrl + Q - Quit""")
         shortcut_window.setStandardButtons(QMessageBox.Ok)
         shortcut_window.exec()
 
-
+    def AnalyzingDialog():
+        shortcut_window = QMessageBox(self.parent.window)
+        shortcut_window.setWindowTitle("Process")
+        shortcut_window.setText("Analyzing")
+        shortcut_window.setIcon(QMessageBox.Information)
+        shortcut_window.exec()
 
 class CustomDialogs:
     def __init__(self, parent):

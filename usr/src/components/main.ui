@@ -429,6 +429,16 @@ li.checked::marker { content: &quot;\2612&quot;; }
                <string>sha1</string>
               </property>
              </item>
+             <item>
+              <property name="text">
+               <string>xxHash</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>xxHash64</string>
+              </property>
+             </item>
             </widget>
            </item>
            <item row="0" column="1">

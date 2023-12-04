@@ -27,7 +27,9 @@ class seal_tab_class:
         print("- Selected dir", selected_dir)
 
     def launch_seal(self):
-        dir_to_seal = self.parent.window.line_edit_directory.text()
+        dir_to_seal_raw = self.parent.window.line_edit_directory.text()
+        # Next line avoid double slash problem in MacOS
+        dir_to_seal = dir_to_seal_raw[:-1] if dir_to_seal_raw.endswith("/") else dir_to_seal_raw
         hash_type = self.hash_type.currentText()
         binary = components.verifications.mhltool_bin
 
@@ -43,9 +45,12 @@ class seal_tab_class:
             QApplication.processEvents() # Update UI
             command_seal = f"./{binary} seal -v -t \'{hash_type}\' -o \'{dir_to_seal}\' \'{dir_to_seal}\'"
             print(command_seal)
+            start_process_time = time.time()
             exec_command_seal = subprocess.Popen(command_seal, shell=True, text=True, stderr=subprocess.PIPE, stdout=subprocess.PIPE)
             
             while exec_command_seal.poll() is None:
+                dialogs.AnalyzingDialog
+                self.parent.window.button_create.setEnabled(False)
                 QApplication.processEvents()
                 time.sleep(0.5)
                 self.parent.set_status_message("Analyzing files")
@@ -59,13 +64,16 @@ class seal_tab_class:
                 time.sleep(0.5)
                 self.parent.set_status_message("Analyzing files...")
             
+            end_process_time = time.time()
+            total_time = time.strftime("%H:%M:%S", time.gmtime(end_process_time - start_process_time))
             standard_out, standard_error = exec_command_seal.communicate()
             seal_returncode = exec_command_seal.returncode
+            self.parent.window.button_create.setEnabled(True)
 
                             
             if seal_returncode == 0:
                 title = "Successful"
-                description = f"The seal process was successful.\nMhl file created in:\n{dir_to_seal}"
+                description = f"The seal process was successful.\nTotal time --> {total_time}\nMhl file created in:\n{dir_to_seal}"
                 CustomDialogs.CustomSuccessDialog(self, title, description, standard_out)
                 self.parent.set_status_message("Seal successful")
                 QApplication.processEvents()

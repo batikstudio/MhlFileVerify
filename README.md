@@ -1,8 +1,8 @@
 # MhlFileVerify
 
-Mhl File Verify for Linux / MacOS is a tool written in Python and Qt to verify and seal data according to the implementation of the MHL standard.
+Mhl File Verify for Linux / MacOS is a tool written in Python and Qt to verify and seal data according to the implementation of the [MHL standard](https://mediahashlist.org/).
 
-This tool is useful to verify backups created from other tools such as Davinci Resolve Clone tool, which generates a mhl file during the copy process with file hashes (md5, sha).
+This tool is useful to verify backups created from other tools such as Davinci Resolve Clone tool, Silverstack or Hedge, which generates a mhl file during the copy process with file hashes (md5, sha, [xxHash]([GitHub - Cyan4973/xxHash: Extremely fast non-cryptographic hash algorithm](https://github.com/Cyan4973/xxHash)) or xxHash64).
 
 Data Wranglers and DIT's can verify video data in Linux and MacOS Systems.
 
@@ -18,7 +18,9 @@ This software is based on and includes the original [mhl-tool](https://github.co
 
 - Drag and drop files or dirs
 
-- Choose the checksum type (MD5 and SHA1)
+- Choose the checksum type (MD5, SHA1, xxHash and xxHash64)
+
+- Portable binaries for Linux and MacOS
 
 - Built in Linux / OSX mhl-tool binaries
 
@@ -36,9 +38,11 @@ Data Management can be a task which requires an high level of safety. By this re
 
 This app is distributed as Appimage format. It has been tested on Ubuntu 22.04, Linux Mint and MxLinux. Other systems like like Rocky Linux 8 / Red Hat are not supponted currently due to the old GLIB version. However, you could make it work from source code if you install Pyside6.
 
+You can download AppImage versions from [releases]([Releases · batikstudio/MhlFileVerify · GitHub](https://github.com/batikstudio/MhlFileVerify/releases)).
+
 ## MacOS
 
-MhlFileVerify app works on OSX as well. You can download app DMGs or run from source. If you run it from source, the platform is autodetected on boot and the correct mhltool binary will be selected. If you prefer use command line tool from pomfort, you can download from their [website](https://pomfort.com/downloads/).
+MhlFileVerify app works on OSX as well. You can download app DMGs from [releases]([Releases · batikstudio/MhlFileVerify · GitHub](https://github.com/batikstudio/MhlFileVerify/releases)) page or run from source. If you run it from source, the platform is autodetected on boot and the correct mhltool binary will be selected. If you prefer use command line tool from pomfort, you can download from their [website](https://pomfort.com/downloads/).
 
 From terminal:
 
@@ -61,7 +65,17 @@ From terminal:
 
 ## Changelog
 
-#### v.04
+#### v0.5
+
+- Added **xxHash** and **xxHash64** hash generation support
+
+- MacOS fixes
+
+- Fix to avoid launch several processes at same time
+
+- Added a process time counter report
+
+#### v0.4
 
 - Fixes for MacOS support
 
@@ -97,7 +111,7 @@ From terminal:
 
 #### v0.1
 
-- Initial GUI design in Tkinter
+- Initial Tkinter GUI design
 
 - Added new compilated binary of mhl-tool to current Linux distros which use libcrypto3
 

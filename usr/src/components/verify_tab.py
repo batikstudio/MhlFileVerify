@@ -40,6 +40,7 @@ class verify_tab_class:
             try:
                 self.parent.set_status_message("Analyzing files...")
                 command_verify = f"./{binary} verify -v -f \'{file_to_verify}\'"
+                start_process_time = time.time()
                 exec_command_verify = subprocess.Popen(command_verify, shell=True, text=True, stderr=subprocess.PIPE, stdout=subprocess.PIPE)
                 while exec_command_verify.poll() is None:
                     QApplication.processEvents()
@@ -55,7 +56,8 @@ class verify_tab_class:
                     time.sleep(0.5)
                     self.parent.set_status_message("Analyzing files...")
 
-
+                end_process_time = time.time()
+                total_time = time.strftime("%H:%M:%S", time.gmtime(end_process_time - start_process_time))
                 standard_out, standard_error = exec_command_verify.communicate()
                 verify_returncode = exec_command_verify.returncode
                 title_error = f"Error: {verify_returncode}"
@@ -71,7 +73,7 @@ class verify_tab_class:
             if verify_returncode == 0:
 
                 title = "Successful"
-                description = f"Verification Completed.\nThe file {file_name} is correct."
+                description = f"Verification Completed.\nTotal time --> {total_time}\nThe file {file_name} is correct."
                 CustomDialogs.CustomSuccessDialog(self, title, description, standard_out)
                 self.parent.set_status_message("Verification successful")
                 QApplication.processEvents()

@@ -2,7 +2,7 @@
 
 Mhl File Verify for Linux / MacOS is a tool written in Python and Qt to verify and seal data according to the implementation of the [MHL standard](https://mediahashlist.org/).
 
-This tool is useful to verify backups created from other tools such as Davinci Resolve Clone tool, Silverstack or Hedge, which generates a mhl file during the copy process with file hashes (md5, sha, [xxHash]([GitHub - Cyan4973/xxHash: Extremely fast non-cryptographic hash algorithm](https://github.com/Cyan4973/xxHash)) or xxHash64).
+This tool is useful to verify backups created from other tools such as Davinci Resolve Clone tool, Silverstack or Hedge, which generates a mhl file during the copy process with file hashes (md5, sha, [xxHash](https://github.com/Cyan4973/xxHash) or xxHash64).
 
 Data Wranglers and DIT's can verify video data in Linux and MacOS Systems.
 
@@ -38,11 +38,11 @@ Data Management can be a task which requires an high level of safety. By this re
 
 This app is distributed as Appimage format. It has been tested on Ubuntu 22.04, Linux Mint and MxLinux. Other systems like like Rocky Linux 8 / Red Hat are not supponted currently due to the old GLIB version. However, you could make it work from source code if you install Pyside6.
 
-You can download AppImage versions from [releases]([Releases · batikstudio/MhlFileVerify · GitHub](https://github.com/batikstudio/MhlFileVerify/releases)).
+You can download AppImage versions from [releases](https://github.com/batikstudio/MhlFileVerify/releases).
 
 ## MacOS
 
-MhlFileVerify app works on OSX as well. You can download app DMGs from [releases]([Releases · batikstudio/MhlFileVerify · GitHub](https://github.com/batikstudio/MhlFileVerify/releases)) page or run from source. If you run it from source, the platform is autodetected on boot and the correct mhltool binary will be selected. If you prefer use command line tool from pomfort, you can download from their [website](https://pomfort.com/downloads/).
+MhlFileVerify app works on OSX as well. You can download app DMGs from [releases](https://github.com/batikstudio/MhlFileVerify/releases) page or run from source. If you run it from source, the platform is autodetected on boot and the correct mhltool binary will be selected. If you prefer use command line tool from pomfort, you can download from their [website](https://pomfort.com/downloads/).
 
 From terminal:
 

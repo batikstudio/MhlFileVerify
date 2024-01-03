@@ -71,7 +71,7 @@ From terminal:
 
 - MacOS fixes
 
-- Fix to avoid launch several processes at same time
+- Fix to avoid launching multiple processes at the same time
 
 - Added a process time counter report
 
